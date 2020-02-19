@@ -3,12 +3,7 @@ import { AreaChart } from 'react-easy-chart'
 
 export default function Thing( props ) {
   return (
-    <AreaChart
-      width={ props.width || 500 }
-      height={ props.height || 300 }
-      interpolate={'cardinal'}
-      data={ props.data }
-      axis
-    />
+    <canvas ref= {props.ref |"canvas"} height = {props.height | 300} 
+      width = { props.width | 300} />
   );
 }
