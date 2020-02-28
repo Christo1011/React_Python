@@ -1,9 +1,12 @@
 import React from 'react'
-import { AreaChart } from 'react-easy-chart'
-
+//import imgabout from './H.png';
 export default function Thing( props ) {
   return (
-    <canvas ref= {props.ref |"canvas"} height = {props.height | 300} 
+      <div className = {props.className |"foo"}>
+      <canvas ref= {props.ref |"canvas"} height = {props.height | 300} 
       width = { props.width | 300} />
+      <img src = {props.img |"./H.png"} height = {props.height | 30} width = { props.width | 30}/>
+      </div>
+      
   );
 }
