@@ -1,6 +1,7 @@
-import React, {  useState, useEffect  }  from 'react'
+/*import React from 'react'
+import { useRef } from 'react';
 //import imgabout from './H.png'
-class Thing extends React.Component {//( props ) {
+export default function Thing( props ) {
   canvasRef: React.RefObject<HTMLCanvasElement>;
   image_new: CanvasImageSource;
   
@@ -49,5 +50,20 @@ class Thing extends React.Component {//( props ) {
   }
   
 }
+
+export default Thing;*/
+
+
+import React, { useRef } from 'react';
+
+ const Thing = () => {
+    let ref = React.useRef();
+     return (
+         <canvas
+            ref={ref} 
+             style={{ width: '100px', height: '100px' }}
+         />
+     );
+ };
 
 export default Thing;
