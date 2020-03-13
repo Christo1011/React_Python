@@ -8,13 +8,13 @@ class Thing extends React.Component {
     constructor(props){
         super(props);
         this.canvasRef = createRef();
-    }
-    imageClick = (src: string) => {
-    console.log('Click!!!!' + src);
-    }      
+    }    
     
-    imageClick2 = () =>{
-    console.log('Click!!!!');
+    imageClick = (e) =>{
+    var a = e._targetInst._currentElement.props.src
+    this.image_new = new Image(30, 30);
+    this.image_new.src = a;
+    console.log("source" + this.image_new.src)
     }      
     render () {
 
@@ -25,11 +25,11 @@ class Thing extends React.Component {
             onDragOver={this.onDragOverHandler} 
             height = {this.props.height | 300} 
             width = { this.props.width | 300} />
-            <img src = {"H.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick2}/>
-            <img src = {"X.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("X.png")}/>
-            <img src = {"Y.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("Y.png")}/>
-            <img src = {"Z.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("Z.png")}/>
-            <img src = {"Not.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("Not.png")}/>
+            <img src = {"H.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick}/>
+            <img src = {"X.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick}/>
+            <img src = {"Y.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick}/>
+            <img src = {"Z.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick}/>
+            <img src = {"Not.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick}/>
             </div>
             )
     }
