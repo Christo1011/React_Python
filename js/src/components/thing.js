@@ -12,6 +12,10 @@ class Thing extends React.Component {
     imageClick = (src: string) => {
     console.log('Click!!!!' + src);
     }      
+    
+    imageClick2 = () =>{
+    console.log('Click!!!!');
+    }      
     render () {
 
         return (
@@ -21,11 +25,11 @@ class Thing extends React.Component {
             onDragOver={this.onDragOverHandler} 
             height = {this.props.height | 300} 
             width = { this.props.width | 300} />
-            <img src = {"H.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick(src)}/>
-            <img src = {"X.png"} height = {this.props.height | 30} width = { this.props.width | 30} />
-            <img src = {"Y.png"} height = {this.props.height | 30} width = { this.props.width | 30}/>
-            <img src = {"Z.png"} height = {this.props.height | 30} width = { this.props.width | 30}/>
-            <img src = {"Not.png"} height = {this.props.height | 30} width = { this.props.width | 30}/>
+            <img src = {"H.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown={this.imageClick2}/>
+            <img src = {"X.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("X.png")}/>
+            <img src = {"Y.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("Y.png")}/>
+            <img src = {"Z.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("Z.png")}/>
+            <img src = {"Not.png"} height = {this.props.height | 30} width = { this.props.width | 30} onMouseDown= {this.imageClick("Not.png")}/>
             </div>
             )
     }
