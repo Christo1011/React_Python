@@ -2,19 +2,18 @@ import React from 'react'
 import createRef from 'create-react-ref/lib/createRef';
 import RefObject from 'create-react-ref/lib/createRef';
 
-
 class Thing extends React.Component {
     canvasRef = RefObject()
     constructor(props){
         super(props);
         this.canvasRef = createRef();
+        this.a = null
     }    
     
     imageClick = (e) =>{
-    var a = e._targetInst._currentElement.props.src
+    this.a = e._targetInst._currentElement.props.src
     this.image_new = new Image(30, 30);
-    this.image_new.src = a;
-    console.log("source" + this.image_new.src)
+    this.image_new.src = this.a;
     }      
     render () {
 
@@ -63,9 +62,16 @@ class Thing extends React.Component {
       y: (ev.clientY - rect.top) * scaleY
     };
   }
+    addString(y1: float,srcs: string){
+        let arr_pos = y1%5
+        var arr = []
+        arr[arr_pos] = srcs
+        //console.log(arr)
+        return arr
+        
+    }
 
     onDropHandler = (ev: React.DragEvent) => {
-        console.log("I'm dropping" + ev);
     ev.preventDefault();
     const acanvas = this.canvasRef.current;
     if (acanvas) {
@@ -77,7 +83,33 @@ class Thing extends React.Component {
         let y1 = 20;
         let x1 = 10;
         let x2 = 600;
-        ctx.drawImage(this.image_new, pos.x - x / 2, pos.y - y / 2, 30, 30);
+        let location = 0;
+        if(pos.y < 60){
+            location = 5
+            ctx.drawImage(this.image_new, pos.x - x / 2, location, 30, 30);
+        }else if (pos.y > 60 && pos.y < 120){
+            location = 65
+            ctx.drawImage(this.image_new, pos.x - x / 2, location, 30, 30);
+            location += 1
+        }else if (pos.y > 120 && pos.y < 180){
+            location = 125
+            ctx.drawImage(this.image_new, pos.x - x / 2, location, 30, 30);
+            location += 2
+        }else if (pos.y > 180 && pos.y < 240){
+            location =185
+            ctx.drawImage(this.image_new, pos.x - x / 2, location, 30, 30);
+            location += 3
+        }
+        //debugger;
+        this.calc = []
+        this.result = []
+        this.calc = this.addString(location, (this.a[0]) )
+        debugger;
+        
+        this.props.comm.send(this.calc)
+        this.result  = this.props.on_update()
+        console.log("calc " + this.calc)
+        location = 0
         let limitx = 250;
         if (pos.x - x / 2 >= limitx) {
           let i: number;
