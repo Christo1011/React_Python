@@ -111,7 +111,6 @@ class Thing extends React.Component {
         this.calc = []
         this.result = []
         this.calc = this.addString(location, (this.a[0]) )
-        debugger;
         this.props.comm.send({content: this.calc, buffers:['a', 'set']})
         console.log("calc " + this.calc)
         location = 0
