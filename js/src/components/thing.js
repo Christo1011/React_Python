@@ -7,8 +7,15 @@ class Thing extends React.Component {
     constructor(props){
         super(props);
         this.canvasRef = createRef();
-        this.a = null
-    }    
+        this.old_msg_callback = props.comm._msg_callback
+        this.myHandleMsg = this.myHandleMsg.bind(this);
+        props.comm.on_msg( this.myHandleMsg );
+    }
+    
+    myHandleMsg(msg) {
+        console.log("in handle msg" + JSON.stringify(msg));
+        this.old_msg_callback(msg);
+    }
     
     imageClick = (e) =>{
     this.a = e._targetInst._currentElement.props.src
@@ -16,7 +23,7 @@ class Thing extends React.Component {
     this.image_new.src = this.a;
     }      
     render () {
-
+        console.log("rendering now:" + this.props.data + ":" + JSON.stringify(this.props.new_data));
         return (
             <div className = {this.props.className |"foo"}>
             <canvas ref={this.canvasRef} 
@@ -100,14 +107,12 @@ class Thing extends React.Component {
             ctx.drawImage(this.image_new, pos.x - x / 2, location, 30, 30);
             location += 3
         }
-        //debugger;
+
         this.calc = []
         this.result = []
         this.calc = this.addString(location, (this.a[0]) )
         debugger;
-        
-        this.props.comm.send(this.calc)
-        this.result  = this.props.on_update()
+        this.props.comm.send({content: this.calc, buffers:['a', 'set']})
         console.log("calc " + this.calc)
         location = 0
         let limitx = 250;
