@@ -13,7 +13,7 @@ class Thing extends React.Component {
     }
     
     myHandleMsg(msg) {
-        console.log("in handle msg" + JSON.stringify(msg));
+        console.log("JavaScript Resive msg" + JSON.stringify(msg['content']['data']['content']));
         this.old_msg_callback(msg);
     }
     
@@ -73,9 +73,15 @@ class Thing extends React.Component {
         let arr_pos = y1%5
         var arr = []
         arr[arr_pos] = srcs
-        //console.log(arr)
+        console.log(arr)
         return arr
-        
+        /*var x = new Array(4);
+
+        for (var i = 0; i < x.length; i++) {
+          x[i] = new Array(arr_pos+1);
+        }
+
+        console.log(x, arr_pos+1);*/
     }
 
     onDropHandler = (ev: React.DragEvent) => {
@@ -111,8 +117,11 @@ class Thing extends React.Component {
         this.calc = []
         this.result = []
         this.calc = this.addString(location, (this.a[0]) )
-        this.props.comm.send({content: this.calc, buffers:['a', 'set']})
-        console.log("calc " + this.calc)
+        debugger; 
+        
+        this.props.comm.send({content: this.calc})//, buffers:['a', 'set']})
+        console.log("JavaScript send Msg " + this.calc )
+        
         location = 0
         let limitx = 250;
         if (pos.x - x / 2 >= limitx) {
@@ -133,7 +142,6 @@ class Thing extends React.Component {
     }
     }
     onDragOverHandler = (ev: React.DragEvent) => {
-        //console.log("I'm dragging" + ev);
         ev.preventDefault();
     };
 }
