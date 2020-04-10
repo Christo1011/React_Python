@@ -22347,7 +22347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -22369,165 +22369,208 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Thing = function (_React$Component) {
-	  _inherits(Thing, _React$Component);
+	    _inherits(Thing, _React$Component);
 
-	  function Thing(props) {
-	    _classCallCheck(this, Thing);
+	    function Thing(props) {
+	        _classCallCheck(this, Thing);
 
-	    var _this = _possibleConstructorReturn(this, (Thing.__proto__ || Object.getPrototypeOf(Thing)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Thing.__proto__ || Object.getPrototypeOf(Thing)).call(this, props));
 
-	    _this.canvasRef = (0, _createRef2.default)();
+	        _this.canvasRef = (0, _createRef2.default)();
 
-	    _this.imageClick = function (e) {
-	      _this.a = e._targetInst._currentElement.props.src;
-	      _this.image_new = new Image(30, 30);
-	      _this.image_new.src = _this.a;
-	    };
+	        _this.imageClick = function (e) {
+	            _this.a = e._targetInst._currentElement.props.src;
+	            _this.image_new = new Image(30, 30);
+	            _this.image_new.src = _this.a;
+	        };
 
-	    _this.onDropHandler = function (ev) {
-	      ev.preventDefault();
-	      var acanvas = _this.canvasRef.current;
-	      if (acanvas) {
-	        var ctx = acanvas.getContext("2d");
-	        if (ctx) {
-	          var pos = _this.getMousePos(acanvas, ev);
-	          var x = +_this.image_new.width;
-	          var y = +_this.image_new.height;
-	          var y1 = 20;
-	          var x1 = 10;
-	          var x2 = 600;
-	          var location = 0;
-	          if (pos.y < 60) {
-	            location = 5;
-	            ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
-	          } else if (pos.y > 60 && pos.y < 120) {
-	            location = 65;
-	            ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
-	            location += 1;
-	          } else if (pos.y > 120 && pos.y < 180) {
-	            location = 125;
-	            ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
-	            location += 2;
-	          } else if (pos.y > 180 && pos.y < 240) {
-	            location = 185;
-	            ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
-	            location += 3;
-	          }
+	        _this.onDropHandler = function (ev) {
+	            ev.preventDefault();
+	            var acanvas = _this.canvasRef.current;
+	            if (acanvas) {
+	                var ctx = acanvas.getContext("2d");
+	                if (ctx) {
+	                    var pos = _this.getMousePos(acanvas, ev);
+	                    var x = +_this.image_new.width;
+	                    var y = +_this.image_new.height;
+	                    var y1 = 20;
+	                    var x1 = 10;
+	                    var x2 = 600;
+	                    var location = 0;
 
-	          _this.calc = [];
-	          _this.result = [];
-	          _this.calc = _this.addString(location, _this.a[0]);
-	          debugger;
+	                    if (pos.y < 60) {
+	                        location = 5;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 0;
+	                    } else if (pos.y > 60 && pos.y < 120) {
+	                        location = 65;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 1;
+	                    } else if (pos.y > 120 && pos.y < 180) {
+	                        location = 125;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 2;
+	                    } else if (pos.y > 180 && pos.y < 240) {
+	                        location = 185;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 3;
+	                    } else if (pos.y > 240 && pos.y < 300) {
+	                        location = 245;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 4;
+	                    } else if (pos.y > 300 && pos.y < 360) {
+	                        location = 305;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 5;
+	                    } else if (pos.y > 360 && pos.y < 420) {
+	                        location = 365;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 6;
+	                    } else if (pos.y > 420 && pos.y < 480) {
+	                        location = 425;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 7;
+	                    } else if (pos.y > 480 && pos.y < 540) {
+	                        location = 485;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 8;
+	                    } else if (pos.y > 540 && pos.y < 600) {
+	                        location = 545;
+	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
+	                        location = 9;
+	                    }
 
-	          _this.props.comm.send({ content: _this.calc }); //, buffers:['a', 'set']})
-	          console.log("JavaScript send Msg " + _this.calc);
+	                    _this.calc = [];
+	                    _this.result = [];
+	                    _this.calc = _this.addString(location, _this.locationx[location], _this.n, _this.a[0]);
+	                    _this.locationx[location] += 1;
+	                    _this.n += 1;
+	                    _this.props.comm.send({ content: _this.calc }); //, buffers:['a', 'set']})
+	                    console.log("JavaScript send Msg " + _this.calc);
 
-	          location = 0;
-	          var limitx = 250;
-	          if (pos.x - x / 2 >= limitx) {
-	            var i = void 0;
-	            for (i = 0; i < 4; i++) {
-	              ctx.beginPath();
-	              ctx.moveTo(x1, y1);
-	              ctx.lineTo(x2, y1);
-	              ctx.stroke();
-	              y1 += 60;
+	                    location = 0;
+	                    var limitx = 750;
+	                    if (pos.x - x / 2 >= limitx) {
+	                        var i = void 0;
+	                        for (i = 0; i < 10; i++) {
+	                            ctx.beginPath();
+	                            ctx.moveTo(x1, y1);
+	                            ctx.lineTo(x2, y1);
+	                            ctx.stroke();
+	                            y1 += 60;
+	                        }
+	                        x1 = x2;
+	                        x2 += 800;
+	                        limitx += 250;
+	                        console.log(x2, pos.x - x / 2, ">", limitx);
+	                    }
+	                }
 	            }
-	            x1 = x2;
-	            x2 += 300;
-	            limitx += 250;
-	            console.log(x2, pos.x - x / 2, ">", limitx);
-	          }
+	        };
+
+	        _this.onDragOverHandler = function (ev) {
+	            ev.preventDefault();
+	        };
+
+	        _this.canvasRef = (0, _createRef2.default)();
+	        _this.old_msg_callback = props.comm._msg_callback;
+	        _this.myHandleMsg = _this.myHandleMsg.bind(_this);
+	        _this.locationx = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+	        _this.n = 3;
+
+	        props.comm.on_msg(_this.myHandleMsg);
+	        return _this;
+	    }
+
+	    _createClass(Thing, [{
+	        key: 'myHandleMsg',
+	        value: function myHandleMsg(msg) {
+	            console.log("JavaScript Resive msg" + JSON.stringify(msg['content']['data']['content']));
+	            this.old_msg_callback(msg);
 	        }
-	      }
-	    };
-
-	    _this.onDragOverHandler = function (ev) {
-	      ev.preventDefault();
-	    };
-
-	    _this.canvasRef = (0, _createRef2.default)();
-	    _this.old_msg_callback = props.comm._msg_callback;
-	    _this.myHandleMsg = _this.myHandleMsg.bind(_this);
-	    props.comm.on_msg(_this.myHandleMsg);
-	    return _this;
-	  }
-
-	  _createClass(Thing, [{
-	    key: 'myHandleMsg',
-	    value: function myHandleMsg(msg) {
-	      console.log("JavaScript Resive msg" + JSON.stringify(msg['content']['data']['content']));
-	      this.old_msg_callback(msg);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      console.log("rendering now:" + this.props.data + ":" + JSON.stringify(this.props.new_data));
-	      return _react2.default.createElement(
-	        'div',
-	        { className: this.props.className | "foo" },
-	        _react2.default.createElement('canvas', { ref: this.canvasRef,
-	          onDrop: this.onDropHandler,
-	          onDragOver: this.onDragOverHandler,
-	          height: this.props.height | 300,
-	          width: this.props.width | 300 }),
-	        _react2.default.createElement('img', { src: "H.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
-	        _react2.default.createElement('img', { src: "X.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
-	        _react2.default.createElement('img', { src: "Y.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
-	        _react2.default.createElement('img', { src: "Z.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
-	        _react2.default.createElement('img', { src: "Not.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick })
-	      );
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var acanvas = this.canvasRef.current;
-	      if (acanvas) {
-	        var ctx = acanvas.getContext("2d");
-	        if (ctx) {
-	          var y = 20;
-	          var x1 = 10;
-	          var x2 = 300;
-	          var i = void 0;
-	          for (i = 0; i < 4; i++) {
-	            ctx.beginPath();
-	            ctx.moveTo(x1, y);
-	            ctx.lineTo(x2, y);
-	            ctx.stroke();
-	            y += 60;
-	          }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            console.log("rendering now:" + this.props.data + ":" + JSON.stringify(this.props.new_data));
+	            return _react2.default.createElement(
+	                'div',
+	                { className: this.props.className | "foo", height: this.props.height | 800, width: this.props.width | 800, overflow: this.props.overflow | scroll },
+	                _react2.default.createElement('canvas', { ref: this.canvasRef,
+	                    onDrop: this.onDropHandler,
+	                    onDragOver: this.onDragOverHandler,
+	                    height: this.props.height | 400,
+	                    width: this.props.width | 800 }),
+	                _react2.default.createElement('img', { src: "H.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
+	                _react2.default.createElement('img', { src: "X.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
+	                _react2.default.createElement('img', { src: "Y.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
+	                _react2.default.createElement('img', { src: "Z.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
+	                _react2.default.createElement('img', { src: "Igate.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick }),
+	                _react2.default.createElement('img', { src: "Not.png", height: this.props.height | 30, width: this.props.width | 30, onMouseDown: this.imageClick })
+	            );
 	        }
-	      }
-	    }
-	  }, {
-	    key: 'getMousePos',
-	    value: function getMousePos(canvas1, ev) {
-	      var acanvas = canvas1.getBoundingClientRect();
-	      var rect = acanvas,
-	          scaleX = acanvas.width / rect.width,
-	          scaleY = acanvas.height / rect.height;
-	      return {
-	        x: (ev.clientX - rect.left) * scaleX,
-	        y: (ev.clientY - rect.top) * scaleY
-	      };
-	    }
-	  }, {
-	    key: 'addString',
-	    value: function addString(y1, srcs) {
-	      var arr_pos = y1 % 5;
-	      var arr = [];
-	      arr[arr_pos] = srcs;
-	      console.log(arr);
-	      return arr;
-	      /*var x = new Array(4);
-	       for (var i = 0; i < x.length; i++) {
-	        x[i] = new Array(arr_pos+1);
-	      }
-	       console.log(x, arr_pos+1);*/
-	    }
-	  }]);
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            //debugger;
+	            var j1 = 1;
+	            var image = new Image(30, 30);
+	            image.src = "H.png";
+	            var acanvas = this.canvasRef.current;
+	            if (acanvas) {
+	                var ctx = acanvas.getContext("2d");
+	                if (ctx) {
+	                    var y1 = 20;
+	                    var x1 = 10;
+	                    var x2 = 800;
+	                    var i = void 0;
+	                    for (i = 0; i < 10; i++) {
+	                        ctx.beginPath();
+	                        ctx.rect(x1, y1 - 15, 30, 30);
+	                        //ctx.drawImage(this.image,x1, y1-15);
+	                        ctx.moveTo(x1 + 30, y1);
+	                        ctx.lineTo(x2, y1);
+	                        ctx.stroke();
+	                        y1 += 60;
+	                    }
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'getMousePos',
+	        value: function getMousePos(canvas1, ev) {
+	            var acanvas = canvas1.getBoundingClientRect();
+	            var rect = acanvas,
+	                scaleX = acanvas.width / rect.width,
+	                scaleY = acanvas.height / rect.height;
+	            return {
+	                x: (ev.clientX - rect.left) * scaleX,
+	                y: (ev.clientY - rect.top) * scaleY
+	            };
+	        }
+	    }, {
+	        key: 'addString',
+	        value: function addString(y1, x1, n, srcs) {
+	            var arr = new Array(2);
+	            //console.log("arr",arr)
+	            for (var i = 0; i < arr.length; i++) {
+	                arr[i] = new Array(n);
+	            }
+	            for (var i = 0; i < 2; i++) {
+	                for (var j = 0; j < n; j++) {
+	                    if (j == 0) {
+	                        arr[i][j] = '0';
+	                    } else if (y1 == i && x1 == j) {
+	                        arr[i][j] = srcs;
+	                    } else {
+	                        arr[i][j] = '/';
+	                    }
+	                }
+	            }
+	            return arr;
+	        }
+	    }]);
 
-	  return Thing;
+	    return Thing;
 	}(_react2.default.Component);
 
 	exports.default = Thing;

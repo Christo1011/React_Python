@@ -13,7 +13,8 @@ class Thing(Component):
         super(Thing, self).__init__(target_name='react.thing', **kwargs)
         self.messages = []
         self.results = []
-        self.draft = 0 
+        self.draft = []
+        self.calc = []
         self.on_msg(self._handle_msg)
         
 
@@ -21,14 +22,32 @@ class Thing(Component):
         #self.send(data)
         #self.send({'method':'update', 'data':self.messages[self]['data']['content']})
 
-    
-    
     def _handle_msg(self, msg):
         #self.messages.append(np.reshape(msg['content']['data']['content'], (-1, 1)))
-        self.messages.append(msg['content']['data']['content'])
-        self.results.append(10)
-        self.draft.append(calcNewResult([['0', 'X', '.'], ['0', '/', 'X']]))
-        self.send({'content':self.results})
+        if(len(self.messages) == 0 ):
+            self.messages.extend(msg['content']['data']['content'])
+            #self.results.extend(msg['content']['data']['content'])
+            self.draft.extend(self.calcNewResult(self.messages))
+            self.send({'content':self.draft})
+            self.draft = []
+            
+        else:
+            self.results.extend(msg['content']['data']['content'])
+            for i in range(len(self.messages)):
+                for j in range(len(self.results[i])):
+                    if( self.messages[i][j] == "/" and self.results[i][j] != "/"):
+                        self.messages[i][j] = self.results[i][j]
+                    if ((self.messages[i][j] != '/' and self.results[i][j] == '/') or self.messages[i][0] or self.results[i][0]):
+                        self.messages[i][j] = self.messages[i][j]
+                    else:
+                        self.messages[i][j] = self.messages[i][j] + self.results[i][j]
+                        #list2[i][j] = list2[i][j] + list1[i][j]
+            self.draft.extend(self.calcNewResult(self.messages))
+            self.send({'content':self.messages})
+            self.send({'content':self.draft})
+            self.draft = []
+            self.results = []
+        
         
     def calcNewResult(self,circuit):
         x  = len(circuit)
@@ -58,8 +77,9 @@ class Thing(Component):
                         B.append(Ygate) 
                     elif(circuit[k][i] == 'Z'):
                         B.append(Zgate) 
+                    elif(circuit[k][i] == 'I'):
+                        B.append(IDgate)
                     elif(circuit[k][i] == '.'):
-                        #print("i am here")
                         B.append(IDgate)
                     elif(circuit[k][i] == '/'):
                         B.append(IDgate)         
@@ -69,8 +89,9 @@ class Thing(Component):
             else:
                 qubit_state = Estim(qubit_state,B[i],B[i+1])
         result = qubit_state.tolist()
+        self.calc.append(result)
         return result
-    def states(s):
+def states(s):
         q=[]
         if(s == '0'):
             q = [1,0]
@@ -84,9 +105,25 @@ class Thing(Component):
             q = [0,0,1,0]
         if(s == '11'):
             q = [0,0,0,1]
+        if(s == '000'):
+            q = [1,0,0,0,0,0,0,0]
+        if(s == '001'):
+            q = [0,1,0,0,0,0,0,0]
+        if(s == '010'):
+            q = [0,0,1,0,0,0,0,0]
+        if(s == '011'):
+            q = [0,0,0,1,0,0,0,0]
+        if(s == '100'):
+            q = [0,0,0,0,1,0,0,0]
+        if(s == '101'):
+            q = [0,0,0,0,0,1,0,0]
+        if(s == '110'):
+            q = [0,0,0,0,0,0,1,0]
+        if(s == '111'):
+            q = [0,0,0,0,0,0,0,1]
         return q
     
-    def Estim(q,gate1,gate2):
+def Estim(q,gate1,gate2):
         A = []
         B = []
         C = []
