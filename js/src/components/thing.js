@@ -82,7 +82,7 @@ class Thing extends React.Component {
   }
     addString(y1: float,x1: int,n: int,srcs: string){
         var arr = new Array(2);  
-        //console.log("arr",arr)
+        
         for (var i = 0; i < arr.length; i++) { 
             arr[i] = new Array(n); 
         } 
@@ -100,6 +100,8 @@ class Thing extends React.Component {
         }
      
         } 
+        arr = [['0', 'I', 'X', '/', '/', '/'], ['0', 'H', 'N', '/', '/', '/']]
+        console.log("arr",arr)
         return arr
     }
     

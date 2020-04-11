@@ -34,14 +34,16 @@ class Thing(Component):
         else:
             self.results.extend(msg['content']['data']['content'])
             for i in range(len(self.messages)):
+                self.messages[i].extend("/")
                 for j in range(len(self.results[i])):
                     if( self.messages[i][j] == "/" and self.results[i][j] != "/"):
                         self.messages[i][j] = self.results[i][j]
-                    if ((self.messages[i][j] != '/' and self.results[i][j] == '/') or self.messages[i][0] or self.results[i][0]):
+                    if(self.messages[i][j] != '/' and self.results[i][j] == '/'):
                         self.messages[i][j] = self.messages[i][j]
-                    else:
-                        self.messages[i][j] = self.messages[i][j] + self.results[i][j]
-                        #list2[i][j] = list2[i][j] + list1[i][j]
+                    if(self.messages[i][0] == self.results[i][0]):
+                        self.messages[i][0] = self.messages[i][0]
+                    if(self.messages[i][0] != self.results[i][0]):
+                        self.messages[i][0] = self.results[i][0]
             self.draft.extend(self.calcNewResult(self.messages))
             self.send({'content':self.messages})
             self.send({'content':self.draft})
@@ -77,9 +79,7 @@ class Thing(Component):
                         B.append(Ygate) 
                     elif(circuit[k][i] == 'Z'):
                         B.append(Zgate) 
-                    elif(circuit[k][i] == 'I'):
-                        B.append(IDgate)
-                    elif(circuit[k][i] == '.'):
+                    elif(circuit[k][i] == 'I' or circuit[k][i] == 'N'):
                         B.append(IDgate)
                     elif(circuit[k][i] == '/'):
                         B.append(IDgate)         

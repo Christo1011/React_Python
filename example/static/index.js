@@ -22551,7 +22551,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'addString',
 	        value: function addString(y1, x1, n, srcs) {
 	            var arr = new Array(2);
-	            //console.log("arr",arr)
+
 	            for (var i = 0; i < arr.length; i++) {
 	                arr[i] = new Array(n);
 	            }
@@ -22566,6 +22566,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                }
 	            }
+	            arr = [['0', 'I', 'X', '/', '/', '/'], ['0', 'H', 'N', '/', '/', '/']];
+	            console.log("arr", arr);
 	            return arr;
 	        }
 	    }]);
