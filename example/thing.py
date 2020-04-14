@@ -47,7 +47,7 @@ class Thing(Component):
             self.draft.extend(self.calcNewResult(self.messages))
             self.send({'content':self.messages})
             self.send({'content':self.draft})
-            #self.draft = []
+            self.draft = []
             self.results = []
         
         
