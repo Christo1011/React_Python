@@ -100,7 +100,7 @@ class Thing extends React.Component {
         }
      
         } 
-        arr = [['0', 'I', 'X', '/', '/', '/'], ['0', 'H', 'N', '/', '/', '/']]
+        //arr = [['0', 'I', 'X', '/', '/', '/'], ['0', 'H', 'N', '/', '/', '/']]
         console.log("arr",arr)
         return arr
     }

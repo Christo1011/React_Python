@@ -47,7 +47,7 @@ class Thing(Component):
             self.draft.extend(self.calcNewResult(self.messages))
             self.send({'content':self.messages})
             self.send({'content':self.draft})
-            self.draft = []
+            #self.draft = []
             self.results = []
         
         
@@ -74,22 +74,26 @@ class Thing(Component):
                     if(circuit[k][i] == 'H'):
                         B.append(Hgate)
                     elif(circuit[k][i] == 'X'):
-                        B.append(Xgate) 
+                        if(circuit[k-1][i] == "N" and circuit[k][i] == 'X'):
+                            B.append(Cnot)
+                            continue
+                        else:
+                            B.append(Xgate) 
                     elif(circuit[k][i] == 'Y'):
                         B.append(Ygate) 
                     elif(circuit[k][i] == 'Z'):
                         B.append(Zgate) 
-                    elif(circuit[k][i] == 'I' or circuit[k][i] == 'N'):
+                    elif(circuit[k][i] == 'I' or circuit[k][i] == '/'):#or circuit[k][i] == 'N'): 
                         B.append(IDgate)
-                    elif(circuit[k][i] == '/'):
-                        B.append(IDgate)         
+                    elif(circuit[k][i] == 'N'):
+                        if(circuit[k-1][i] == "X" and circuit[k][i] == 'N'):
+                            B.append(Cnot1)
+                            continue
+                        else:
+                            B.append(IDgate)
         for i in range(0,len(B),2):
-            if(len(B[i]) == 4):
-                qubit_state = np.dot(B[i],qubit_state)
-            else:
-                qubit_state = Estim(qubit_state,B[i],B[i+1])
+                qubit_state = Estim2(qubit_state,B[i],B[i+1])
         result = qubit_state.tolist()
-        self.calc.append(result)
         return result
 def states(s):
         q=[]
@@ -105,45 +109,16 @@ def states(s):
             q = [0,0,1,0]
         if(s == '11'):
             q = [0,0,0,1]
-        if(s == '000'):
-            q = [1,0,0,0,0,0,0,0]
-        if(s == '001'):
-            q = [0,1,0,0,0,0,0,0]
-        if(s == '010'):
-            q = [0,0,1,0,0,0,0,0]
-        if(s == '011'):
-            q = [0,0,0,1,0,0,0,0]
-        if(s == '100'):
-            q = [0,0,0,0,1,0,0,0]
-        if(s == '101'):
-            q = [0,0,0,0,0,1,0,0]
-        if(s == '110'):
-            q = [0,0,0,0,0,0,1,0]
-        if(s == '111'):
-            q = [0,0,0,0,0,0,0,1]
         return q
-    
-def Estim(q,gate1,gate2):
-        A = []
-        B = []
-        C = []
+def Estim2(q,gate1,gate2):
+        print(len(gate1),len(gate2))
         D = []
-        x = int(len(q)/2)
-        E = np.zeros((4,4), np.float64)
-        A = gate2[0][0] * gate1
-        B = gate2[0][1] * gate1
-        C = gate2[1][0] * gate1
-        D = gate2[1][1] * gate1
-
-        for i in range(len(E)):
-            for j in range(len(E)):
-                if(i < 2 and j < 2):
-                    E[i][j] = A[i][j]
-                if(i < 2 and j > 1):
-                     E[i][j] = B[i%x][j%x]
-                if(i > 1 and j < 2):
-                    E[i][j] = C[i%x][j%x]
-                if(i > 1 and j  > 1):
-                    E[i][j] = D[i%x][j%x]
-
-        return(np.dot(E,q))
+        E = []
+        print("q",q,"gate1",gate1,"gate12",gate2)
+        if(len(gate1) == 2 and len(gate2) == 2):
+            E = np.kron(gate2,gate1)
+            D = np.dot(E,q)
+        elif(len(gate1) == 4):
+            D = np.dot(gate1,q)
+       
+        return D
