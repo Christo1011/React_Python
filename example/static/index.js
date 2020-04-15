@@ -22397,7 +22397,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var x1 = 10;
 	                    var x2 = 600;
 	                    var location = 0;
-
+	                    /*if(pos.y < 25){
+	                        const image = new Image();
+	                        image.src = "Zero.png"
+	                        ctx.drawImage(image,x1, y1-15, 30, 30)
+	                    }*/
 	                    if (pos.y < 60) {
 	                        location = 5;
 	                        ctx.drawImage(_this.image_new, pos.x - x / 2, location, 30, 30);
@@ -22511,10 +22515,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            //debugger;
+	            var _this2 = this;
+
+	            debugger;
 	            var j1 = 1;
-	            var image = new Image(30, 30);
-	            image.src = "H.png";
+	            //const image = new Image();
+	            this.image = new Image();
+	            this.image.src = "Zero.png";
 	            var acanvas = this.canvasRef.current;
 	            if (acanvas) {
 	                var ctx = acanvas.getContext("2d");
@@ -22523,15 +22530,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var x1 = 10;
 	                    var x2 = 800;
 	                    var i = void 0;
-	                    for (i = 0; i < 10; i++) {
-	                        ctx.beginPath();
-	                        ctx.rect(x1, y1 - 15, 30, 30);
-	                        //ctx.drawImage(this.image,x1, y1-15);
-	                        ctx.moveTo(x1 + 30, y1);
-	                        ctx.lineTo(x2, y1);
-	                        ctx.stroke();
-	                        y1 += 60;
-	                    }
+	                    this.image.onload = function () {
+	                        for (i = 0; i < 10; i++) {
+	                            ctx.beginPath();
+	                            ctx.rect(x1, y1 - 15, 30, 30);
+	                            ctx.drawImage(_this2.image, x1, y1 - 15, 30, 30);
+
+	                            //ctx.drawImage(this.image,x1, y1-15);
+	                            ctx.moveTo(x1 + 30, y1);
+	                            ctx.lineTo(x2, y1);
+	                            ctx.stroke();
+	                            y1 += 60;
+	                        }
+	                    };
+	                    this.image.addEventListener('mousedown', function (e) {
+	                        console.log("Event::");
+	                        if (_this2.image.src == "Zero.png") {
+	                            _this2.image.src = "One.png";
+	                            console.log("Push zero");
+	                        }
+	                        if (_this2.image.src == "One.png") {
+	                            _this2.image.src = "Zero.png";
+	                            console.log("Push one");
+	                        }
+	                    });
 	                }
 	            }
 	        }
@@ -22566,7 +22588,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                }
 	            }
-	            //arr = [['0', 'I', 'X', '/', '/', '/'], ['0', 'H', 'N', '/', '/', '/']]
+	            //arr = [['0', 'I', 'X', '/'], ['0', 'H', 'N', '/' ]]
 	            console.log("arr", arr);
 	            return arr;
 	        }

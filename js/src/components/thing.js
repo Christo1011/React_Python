@@ -47,8 +47,9 @@ class Thing extends React.Component {
     componentDidMount() {
         //debugger;
         var j1 = 1
-        const image = new Image(30, 30);
-        image.src = "H.png"
+        //const image = new Image();
+        this.image = new Image();
+        this.image.src = "Zero.png"
         const acanvas = this.canvasRef.current;
         if (acanvas) {
           const ctx = acanvas.getContext("2d");
@@ -56,16 +57,31 @@ class Thing extends React.Component {
             let y1 = 20;
             const x1 = 10;
             const x2 = 800;
-            let i: number;        
-            for (i = 0; i < 10; i++) {
-              ctx.beginPath();
-              ctx.rect(x1, y1-15, 30, 30);
-              //ctx.drawImage(this.image,x1, y1-15);
-              ctx.moveTo(x1+30, y1);
-              ctx.lineTo(x2, y1);
-              ctx.stroke();
-              y1 += 60;
+            let i: number;    
+            this.image.onload = ()=>{
+                for (i = 0; i < 10; i++) {
+                  ctx.beginPath();
+                  ctx.rect(x1, y1-15, 30, 30);
+                  ctx.drawImage(this.image,x1, y1-15, 30, 30)
+                  
+                  //ctx.drawImage(this.image,x1, y1-15);
+                  ctx.moveTo(x1+30, y1);
+                  ctx.lineTo(x2, y1);
+                  ctx.stroke();
+                  y1 += 60;
+                }
             }
+            this.image.addEventListener('mousedown', e => {
+                console.log("Event::")
+                if(this.image.src == "Zero.png"){
+                    this.image.src = "One.png"
+                    console.log("Push zero")
+                }
+                if(this.image.src == "One.png"){
+                    this.image.src = "Zero.png"
+                    console.log("Push one")
+                }
+            })
           }
         }
   }
@@ -100,7 +116,7 @@ class Thing extends React.Component {
         }
      
         } 
-        //arr = [['0', 'I', 'X', '/', '/', '/'], ['0', 'H', 'N', '/', '/', '/']]
+        //arr = [['0', 'I', 'X', '/'], ['0', 'H', 'N', '/' ]]
         console.log("arr",arr)
         return arr
     }
@@ -118,7 +134,11 @@ class Thing extends React.Component {
         let x1 = 10;
         let x2 = 600;
         let location = 0;
-        
+        /*if(pos.y < 25){
+            const image = new Image();
+            image.src = "Zero.png"
+            ctx.drawImage(image,x1, y1-15, 30, 30)
+        }*/
         if(pos.y < 60){
             location = 5
             ctx.drawImage(this.image_new, pos.x - x / 2, location, 30, 30);

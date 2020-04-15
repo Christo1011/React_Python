@@ -28,6 +28,7 @@ class Thing(Component):
             self.messages.extend(msg['content']['data']['content'])
             #self.results.extend(msg['content']['data']['content'])
             self.draft.extend(self.calcNewResult(self.messages))
+            self.send({'content':self.messages})
             self.send({'content':self.draft})
             self.draft = []
             
@@ -47,6 +48,7 @@ class Thing(Component):
             self.draft.extend(self.calcNewResult(self.messages))
             self.send({'content':self.messages})
             self.send({'content':self.draft})
+            self.send({'content':self.results})
             self.draft = []
             self.results = []
         
@@ -68,6 +70,8 @@ class Thing(Component):
         Ygate = np.array([[0.0,-1j],[1j,0.0]])
         IDgate = np.array([[1.0,0.0],[0.0,1.0]])
         Cnot = np.array([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
+        Cnot1 = np.array([[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]])
+
         for i in range(max(map(lambda x: len (x), circuit))):#len(circuit)):
             if(i>0):
                 for k in range(len(circuit)):
@@ -111,7 +115,6 @@ def states(s):
             q = [0,0,0,1]
         return q
 def Estim2(q,gate1,gate2):
-        print(len(gate1),len(gate2))
         D = []
         E = []
         print("q",q,"gate1",gate1,"gate12",gate2)
